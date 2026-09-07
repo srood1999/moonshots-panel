@@ -74,10 +74,10 @@ const CustomAvatar = ({ id }) => {
     case 'alex':
       return (
         <svg viewBox="0 0 100 100" className="w-full h-full bg-purple-100 rounded-full">
-          <rect x="15" y="70" width="70" height="40" fill="#1e3a8a" rx="20" />
-          <polygon points="35,70 65,70 50,90" fill="#bae6fd" />
-          <rect x="42" y="60" width="16" height="15" fill="#f5d0b5" />
-          <ellipse cx="50" cy="42" rx="22" ry="26" fill="#f5d0b5" />
+          <rect x="15" y="70" width="70" height="40" fill="#1e3a8a" rx="20" /> 
+          <polygon points="35,70 65,70 50,90" fill="#bae6fd" /> 
+          <rect x="42" y="60" width="16" height="15" fill="#f5d0b5" /> 
+          <ellipse cx="50" cy="42" rx="22" ry="26" fill="#f5d0b5" /> 
           <path d="M 28 35 Q 25 45 25 55 L 32 55 Q 32 45 30 35 Z" fill="#5a3b22" />
           <path d="M 72 35 Q 75 45 75 55 L 68 55 Q 68 45 70 35 Z" fill="#5a3b22" />
           <circle cx="42" cy="40" r="2.5" fill="#333" />
@@ -89,9 +89,9 @@ const CustomAvatar = ({ id }) => {
     case 'dave':
       return (
         <svg viewBox="0 0 100 100" className="w-full h-full bg-emerald-100 rounded-full">
-          <rect x="20" y="70" width="60" height="40" fill="#3b82f6" rx="20" />
-          <path d="M 30 70 L 30 100 M 40 70 L 40 100 M 50 70 L 50 100 M 60 70 L 60 100 M 70 70 L 70 100" stroke="#ef4444" strokeWidth="2" opacity="0.5" />
-          <path d="M 20 80 L 80 80 M 20 90 L 80 90" stroke="#ef4444" strokeWidth="2" opacity="0.5" />
+          <rect x="20" y="70" width="60" height="40" fill="#3b82f6" rx="20" /> 
+          <path d="M 30 70 L 30 100 M 40 70 L 40 100 M 50 70 L 50 100 M 60 70 L 60 100 M 70 70 L 70 100" stroke="#ef4444" strokeWidth="2" opacity="0.5"/>
+          <path d="M 20 80 L 80 80 M 20 90 L 80 90" stroke="#ef4444" strokeWidth="2" opacity="0.5"/>
           <rect x="42" y="60" width="16" height="15" fill="#e8b796" />
           <ellipse cx="50" cy="42" rx="23" ry="25" fill="#e8b796" />
           <path d="M 27 40 Q 25 15 50 15 Q 75 15 73 40 Q 65 25 50 25 Q 35 25 27 40 Z" fill="#9ca3af" />
@@ -107,7 +107,7 @@ const CustomAvatar = ({ id }) => {
           <rect x="15" y="70" width="70" height="40" fill="#7dd3fc" rx="20" />
           <polygon points="40,70 60,70 50,85" fill="#ffffff" />
           <rect x="40" y="60" width="20" height="15" fill="#d99c78" />
-          <ellipse cx="50" cy="42" rx="24" ry="26" fill="#d99c78" />
+          <ellipse cx="50" cy="42" rx="24" ry="26" fill="#d99c78" /> 
           <circle cx="41" cy="40" r="2.5" fill="#333" />
           <circle cx="59" cy="40" r="2.5" fill="#333" />
           <path d="M 40 52 Q 50 62 60 52" stroke="#333" strokeWidth="2.5" fill="none" />
@@ -129,12 +129,12 @@ const CustomAvatar = ({ id }) => {
     case 'emad':
       return (
         <svg viewBox="0 0 100 100" className="w-full h-full bg-rose-100 rounded-full">
-          <rect x="18" y="70" width="64" height="40" fill="#4b5563" rx="20" />
-          <polygon points="42,70 58,70 50,85" fill="#000000" />
+          <rect x="18" y="70" width="64" height="40" fill="#4b5563" rx="20" /> 
+          <polygon points="42,70 58,70 50,85" fill="#000000" /> 
           <rect x="42" y="60" width="16" height="15" fill="#b07b57" />
           <ellipse cx="50" cy="44" rx="24" ry="25" fill="#b07b57" />
           <path d="M 24 45 Q 25 15 50 12 Q 75 15 76 45 Q 65 25 50 25 Q 35 25 24 45 Z" fill="#111827" />
-          <path d="M 35 20 Q 40 30 50 25 Q 60 30 65 20 Z" fill="#111827" />
+          <path d="M 35 20 Q 40 30 50 25 Q 60 30 65 20 Z" fill="#111827" /> 
           <rect x="30" y="38" width="16" height="10" fill="none" stroke="#e5e7eb" strokeWidth="2" rx="2" />
           <rect x="54" y="38" width="16" height="10" fill="none" stroke="#e5e7eb" strokeWidth="2" rx="2" />
           <line x1="46" y1="43" x2="54" y2="43" stroke="#e5e7eb" strokeWidth="2" />
@@ -156,41 +156,36 @@ export default function App() {
   const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
 
-  const activeChar = activeCharId === 'all' ? PANEL_CHAR : CHARACTERS.find((c) => c.id === activeCharId);
+  const activeChar = activeCharId === 'all' ? PANEL_CHAR : CHARACTERS.find(c => c.id === activeCharId);
 
   useEffect(() => {
     const initialMessages = {
-      all: [
-        {
-          role: 'model',
-          text: "Welcome to the panel discussion! Ask a question here to get perspectives from all five visionaries at once.",
-          charId: 'system',
-        },
-      ],
+      all: [{ role: 'model', text: "Welcome to the panel discussion! Ask a question here to get perspectives from all five visionaries at once.", charId: 'system' }]
     };
-    CHARACTERS.forEach((char) => {
-      initialMessages[char.id] = [{ role: 'model', text: char.intro }];
+    CHARACTERS.forEach(char => {
+      initialMessages[char.id] = [
+        { role: 'model', text: char.intro }
+      ];
     });
     setMessages(initialMessages);
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, activeCharId]);
 
-  const fetchWithRetry = async (url, options, retries = 3) => {
-    const delays = [1000, 2000, 4000];
+  const fetchWithRetry = async (url, options, retries = 5) => {
+    const delays = [1000, 2000, 4000, 8000, 16000];
     for (let i = 0; i < retries; i++) {
       try {
         const response = await fetch(url, options);
         if (!response.ok) {
-          const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.error || `API Error: ${response.status}`);
+          throw new Error(`API Error: ${response.status}`);
         }
         return await response.json();
       } catch (err) {
         if (i === retries - 1) throw err;
-        await new Promise((res) => setTimeout(res, delays[i]));
+        await new Promise(res => setTimeout(res, delays[i]));
       }
     }
   };
@@ -201,98 +196,95 @@ export default function App() {
 
     const userMessage = { role: 'user', text: inputText.trim() };
     const currentHistory = messages[activeCharId] || [];
-
-    setMessages((prev) => ({
+    
+    setMessages(prev => ({
       ...prev,
-      [activeCharId]: [...currentHistory, userMessage],
+      [activeCharId]: [...currentHistory, userMessage]
     }));
     setInputText('');
     setIsLoading(true);
     setError(null);
 
     try {
-      const endpoint = '/api/chat';
-
+      // NOTE: Ensure your Vercel setup or backend securely provides the actual key.
+      const apiKey = process.env.VITE_GEMINI_API_KEY || ""; 
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      
       if (activeCharId === 'all') {
         const fetchPromises = CHARACTERS.map(async (char) => {
           const contextContents = currentHistory
-            .filter((msg) => msg.role === 'user')
-            .map((msg) => ({ role: 'user', parts: [{ text: msg.text }] }));
-
+            .filter(msg => msg.role === 'user')
+            .map(msg => ({ role: 'user', parts: [{ text: msg.text }] }));
+            
           contextContents.push({ role: 'user', parts: [{ text: userMessage.text }] });
 
           const payload = {
             contents: contextContents,
             systemInstruction: {
-              parts: [
-                {
-                  text: `${char.philosophy} Keep your answers conversational, engaging, highly opinionated based on your persona, and in the first person. Aim for 2 to 4 sentences maximum per response to keep the chat snappy.`,
-                },
-              ],
+              parts: [{ text: `${char.philosophy} Use the Google Search tool to find actual quotes, recent podcast transcripts, and up-to-date facts about your real-world counterpart's views on the user's topic before answering. Keep your answers conversational, engaging, highly opinionated based on your persona, and in the first person. Aim for 2 to 4 sentences maximum per response.` }]
             },
+            tools: [{ googleSearch: {} }] // ADDED SEARCH GROUNDING
           };
 
-          const data = await fetchWithRetry(endpoint, {
+          const data = await fetchWithRetry(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(payload)
           });
 
-          const responseText = data?.text;
-          if (!responseText) throw new Error("Invalid response received from server");
+          const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (!responseText) throw new Error("Invalid response");
 
           return { role: 'model', text: responseText, charId: char.id };
         });
 
         const results = await Promise.allSettled(fetchPromises);
         const successfulResponses = results
-          .filter((r) => r.status === 'fulfilled')
-          .map((r) => r.value);
+          .filter(r => r.status === 'fulfilled')
+          .map(r => r.value);
 
         if (successfulResponses.length === 0) throw new Error("All panel responses failed.");
 
-        setMessages((prev) => ({
+        setMessages(prev => ({
           ...prev,
-          all: [...prev.all, ...successfulResponses],
+          all: [...prev.all, ...successfulResponses]
         }));
       } else {
-        const formattedContents = currentHistory.map((msg) => ({
+        const formattedContents = currentHistory.map(msg => ({
           role: msg.role === 'model' ? 'model' : 'user',
-          parts: [{ text: msg.text }],
+          parts: [{ text: msg.text }]
         }));
         formattedContents.push({ role: 'user', parts: [{ text: userMessage.text }] });
 
         const payload = {
           contents: formattedContents,
           systemInstruction: {
-            parts: [
-              {
-                text: `${activeChar.philosophy} Keep your answers conversational, engaging, highly opinionated based on your persona, and in the first person. Aim for 2 to 4 sentences maximum per response to keep the chat snappy.`,
-              },
-            ],
+            parts: [{ text: `${activeChar.philosophy} Use the Google Search tool to find actual quotes, recent podcast transcripts, and up-to-date facts about your real-world counterpart's views on the user's topic before answering. Keep your answers conversational, engaging, highly opinionated based on your persona, and in the first person. Aim for 2 to 4 sentences maximum per response.` }]
           },
+          tools: [{ googleSearch: {} }] // ADDED SEARCH GROUNDING
         };
 
-        const data = await fetchWithRetry(endpoint, {
+        const data = await fetchWithRetry(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(payload)
         });
 
-        const responseText = data?.text;
-
+        const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        
         if (responseText) {
-          setMessages((prev) => ({
+          setMessages(prev => ({
             ...prev,
-            [activeCharId]: [...prev[activeCharId], { role: 'model', text: responseText }],
+            [activeCharId]: [...prev[activeCharId], { role: 'model', text: responseText }]
           }));
         } else {
-          throw new Error("Invalid response structure from server.");
+          throw new Error("Invalid response structure from API.");
         }
       }
+
     } catch (err) {
       console.error(err);
-      setError(err.message || "Failed to get a response. Please try again.");
+      setError("Failed to get a response. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -300,6 +292,7 @@ export default function App() {
 
   return (
     <div className="flex h-screen bg-stone-100 font-sans text-stone-800">
+      
       {/* Sidebar - Character Selection */}
       <div className="w-80 bg-gradient-to-b from-[#2A241D] to-[#14100C] border-r border-[#4A3B2C] flex flex-col shadow-2xl z-10">
         <div className="p-6 border-b border-[#4A3B2C]">
@@ -311,17 +304,17 @@ export default function App() {
             Talk to the AI avatars of leading tech visionaries about their philosophies.
           </p>
         </div>
-
+        
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           <button
             onClick={() => setActiveCharId('all')}
             className={`w-full flex items-center gap-4 p-3 rounded-2xl transition-all duration-200 text-left border-2
-              ${activeCharId === 'all'
-                ? `border-[#D4AF37] bg-gradient-to-r from-[#3F3124] to-[#2A241D] shadow-[0_0_15px_rgba(212,175,55,0.15)] transform scale-[1.02]`
+              ${activeCharId === 'all' 
+                ? `border-[#D4AF37] bg-gradient-to-r from-[#3F3124] to-[#2A241D] shadow-[0_0_15px_rgba(212,175,55,0.15)] transform scale-[1.02]` 
                 : 'border-transparent hover:bg-[#32281F] hover:shadow-sm'}`}
           >
             <div className={`w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center shadow-inner bg-gradient-to-br from-[#D4AF37] to-[#92400E] text-white`}>
-              <Users className="w-6 h-6" />
+               <Users className="w-6 h-6" />
             </div>
             <div className="flex-1 min-w-0">
               <h3 className={`font-bold text-sm truncate ${activeCharId === 'all' ? 'text-[#FDE68A]' : 'text-[#D6D3D1]'}`}>
@@ -332,20 +325,20 @@ export default function App() {
               </p>
             </div>
           </button>
-
+          
           <div className="h-px bg-[#4A3B2C] my-2 w-full" />
 
-          {CHARACTERS.map((char) => (
+          {CHARACTERS.map(char => (
             <button
               key={char.id}
               onClick={() => setActiveCharId(char.id)}
               className={`w-full flex items-center gap-4 p-3 rounded-2xl transition-all duration-200 text-left border-2
-                ${activeCharId === char.id
-                  ? `border-[#D4AF37] bg-gradient-to-r from-[#3F3124] to-[#2A241D] shadow-[0_0_15px_rgba(212,175,55,0.15)] transform scale-[1.02]`
+                ${activeCharId === char.id 
+                  ? `border-[#D4AF37] bg-gradient-to-r from-[#3F3124] to-[#2A241D] shadow-[0_0_15px_rgba(212,175,55,0.15)] transform scale-[1.02]` 
                   : 'border-transparent hover:bg-[#32281F] hover:shadow-sm'}`}
             >
               <div className={`w-14 h-14 rounded-full flex-shrink-0 shadow-inner ${char.color} p-1 overflow-hidden border border-[#524434]`}>
-                <CustomAvatar id={char.id} />
+                 <CustomAvatar id={char.id} />
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className={`font-bold text-sm truncate ${activeCharId === char.id ? 'text-[#FDE68A]' : 'text-[#D6D3D1]'}`}>
@@ -363,12 +356,12 @@ export default function App() {
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col h-full bg-[#fdfaf6]">
         {/* Chat Header */}
-        <div className="p-6 border-b border-[#4A3B2C] bg-gradient-to-r from-[#2A241D] via-[#36291E] to-[#2A241D] flex items-center gap-4 shadow-md transition-colors duration-300">
+        <div className={`p-6 border-b border-[#4A3B2C] bg-gradient-to-r from-[#2A241D] via-[#36291E] to-[#2A241D] flex items-center gap-4 shadow-md transition-colors duration-300`}>
           <div className={`w-16 h-16 rounded-full flex-shrink-0 shadow-[0_0_10px_rgba(212,175,55,0.3)] ${activeCharId === 'all' ? 'bg-gradient-to-br from-[#D4AF37] to-[#92400E]' : activeChar.color} border-2 border-[#D4AF37] overflow-hidden flex items-center justify-center`}>
-            {activeCharId === 'all' ? <Users className="w-8 h-8 text-white" /> : <CustomAvatar id={activeChar.id} />}
+             {activeCharId === 'all' ? <Users className="w-8 h-8 text-white" /> : <CustomAvatar id={activeChar.id} />}
           </div>
           <div>
-            <h2 className="text-2xl font-black tracking-tight bg-gradient-to-r from-[#FDE68A] via-[#D4AF37] to-[#92400E] text-transparent bg-clip-text drop-shadow-sm">
+            <h2 className={`text-2xl font-black tracking-tight bg-gradient-to-r from-[#FDE68A] via-[#D4AF37] to-[#92400E] text-transparent bg-clip-text drop-shadow-sm`}>
               {activeChar.name}
             </h2>
             <p className="text-sm font-medium text-[#C8BBAA]">
@@ -382,8 +375,8 @@ export default function App() {
           {(messages[activeCharId] || []).map((msg, idx) => {
             const isModel = msg.role === 'model';
             const isSystem = msg.charId === 'system';
-            const speakerChar = isModel && msg.charId && !isSystem ? CHARACTERS.find((c) => c.id === msg.charId) : activeChar;
-
+            const speakerChar = isModel && msg.charId && !isSystem ? CHARACTERS.find(c => c.id === msg.charId) : activeChar;
+            
             return (
               <div key={idx} className={`flex ${isModel ? 'justify-start' : 'justify-end'} items-end gap-2`}>
                 {isModel && activeCharId === 'all' && !isSystem && speakerChar && (
@@ -391,14 +384,12 @@ export default function App() {
                     <CustomAvatar id={speakerChar.id} />
                   </div>
                 )}
-
-                <div
-                  className={`max-w-[75%] rounded-3xl p-4 shadow-sm ${
-                    isModel
-                      ? `bg-white border ${speakerChar?.border || activeChar.border} rounded-tl-none`
-                      : 'bg-amber-700 text-white rounded-tr-none'
-                  }`}
-                >
+                
+                <div className={`max-w-[75%] rounded-3xl p-4 shadow-sm ${
+                  isModel 
+                    ? `bg-white border ${speakerChar?.border || activeChar.border} rounded-tl-none` 
+                    : 'bg-amber-700 text-white rounded-tr-none'
+                }`}>
                   {isModel && activeCharId === 'all' && !isSystem && speakerChar && (
                     <div className={`text-xs font-bold mb-1 ${speakerChar.text}`}>
                       {speakerChar.name}
@@ -411,7 +402,7 @@ export default function App() {
               </div>
             );
           })}
-
+          
           {isLoading && (
             <div className="flex justify-start">
               <div className={`bg-white border ${activeChar.border} rounded-3xl rounded-tl-none p-4 shadow-sm flex items-center gap-2`}>
@@ -420,7 +411,7 @@ export default function App() {
               </div>
             </div>
           )}
-
+          
           {error && (
             <div className="flex justify-center my-4">
               <div className="bg-red-50 text-red-600 px-4 py-2 rounded-full text-sm flex items-center gap-2 shadow-sm border border-red-200">
@@ -434,7 +425,7 @@ export default function App() {
 
         {/* Input Area */}
         <div className="p-4 bg-stone-50 border-t border-stone-200">
-          <form
+          <form 
             onSubmit={handleSendMessage}
             className="max-w-4xl mx-auto relative flex items-center"
           >
@@ -450,8 +441,8 @@ export default function App() {
               type="submit"
               disabled={!inputText.trim() || isLoading}
               className={`absolute right-2 p-3 rounded-full transition-all duration-200 flex items-center justify-center
-                ${inputText.trim() && !isLoading
-                  ? `${activeChar.color} text-white shadow-md hover:scale-105`
+                ${inputText.trim() && !isLoading 
+                  ? `${activeChar.color} text-white shadow-md hover:scale-105` 
                   : 'bg-stone-200 text-stone-400 cursor-not-allowed'}`}
             >
               <Send className="w-5 h-5 ml-1" />
