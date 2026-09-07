@@ -213,7 +213,7 @@ export default function App() {
         throw new Error("API Key is missing. Please add VITE_GEMINI_API_KEY to your Vercel environment variables.");
       }
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
       
       if (activeCharId === 'all') {
         const fetchPromises = CHARACTERS.map(async (char) => {
