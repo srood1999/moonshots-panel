@@ -207,7 +207,7 @@ export default function App() {
 
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ""; 
-      const modelName = "gemini-1.5-flash";
+      const modelName = "gemini-3.7-flash";
       
       if (!apiKey) {
         throw new Error("API Key is missing. Please add VITE_GEMINI_API_KEY to your Vercel environment variables.");
