@@ -216,39 +216,44 @@ export default function App() {
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
       
       if (activeCharId === 'all') {
-        const fetchPromises = CHARACTERS.map(async (char) => {
-          const contextContents = currentHistory
-            .filter(msg => msg.role === 'user')
-            .map(msg => ({ role: 'user', parts: [{ text: msg.text }] }));
-            
-          contextContents.push({ role: 'user', parts: [{ text: userMessage.text }] });
+        const successfulResponses = [];
+        
+        for (const char of CHARACTERS) {
+          try {
+            const contextContents = currentHistory
+              .filter(msg => msg.role === 'user')
+              .map(msg => ({ role: 'user', parts: [{ text: msg.text }] }));
+              
+            contextContents.push({ role: 'user', parts: [{ text: userMessage.text }] });
 
-          const payload = {
-            contents: contextContents,
-            systemInstruction: {
-              parts: [{ text: `${char.philosophy} Use the Google Search tool to find actual quotes, recent podcast transcripts, and up-to-date facts about your real-world counterpart's views on the user's topic before answering. Keep your answers conversational, engaging, highly opinionated based on your persona, and in the first person. Aim for 2 to 4 sentences maximum per response.` }]
-            },
-            tools: [{ googleSearch: {} }]
-          };
+            const payload = {
+              contents: contextContents,
+              systemInstruction: {
+                parts: [{ text: `${char.philosophy} Use the Google Search tool to find actual quotes, recent podcast transcripts, and up-to-date facts about your real-world counterpart's views on the user's topic before answering. Keep your answers conversational, engaging, highly opinionated based on your persona, and in the first person. Aim for 2 to 4 sentences maximum per response.` }]
+              },
+              tools: [{ googleSearch: {} }]
+            };
 
-          const data = await fetchWithRetry(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
+            const data = await fetchWithRetry(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
 
-          const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (!responseText) throw new Error("Invalid response");
+            const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (responseText) {
+              successfulResponses.push({ role: 'model', text: responseText, charId: char.id });
+            }
+            // Add a 1.5 second delay between requests to avoid rate limits
+            await new Promise(res => setTimeout(res, 1500));
+          } catch (fetchError) {
+            console.error(`Failed to fetch response for ${char.name}`, fetchError);
+          }
+        }
 
-          return { role: 'model', text: responseText, charId: char.id };
-        });
-
-        const results = await Promise.allSettled(fetchPromises);
-        const successfulResponses = results
-          .filter(r => r.status === 'fulfilled')
-          .map(r => r.value);
-
-        if (successfulResponses.length === 0) throw new Error("All panel responses failed.");
+        if (successfulResponses.length === 0) {
+          throw new Error("All panel responses failed. You may have hit a rate limit.");
+        }
 
         setMessages(prev => ({
           ...prev,
@@ -435,6 +440,8 @@ export default function App() {
             className="max-w-4xl mx-auto relative flex items-center"
           >
             <input
+              id="chatInput"
+              name="chatInput"
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
