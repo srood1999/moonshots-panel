@@ -206,14 +206,14 @@ export default function App() {
     setError(null);
 
     try {
-      // Use Vite's import.meta.env to securely load the key
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ""; 
+      const modelName = import.meta.env.VITE_GEMINI_MODEL || "gemini-2.5-flash";
       
       if (!apiKey) {
         throw new Error("API Key is missing. Please add VITE_GEMINI_API_KEY to your Vercel environment variables.");
       }
 
-   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
       
       if (activeCharId === 'all') {
         const fetchPromises = CHARACTERS.map(async (char) => {
@@ -228,7 +228,7 @@ export default function App() {
             systemInstruction: {
               parts: [{ text: `${char.philosophy} Use the Google Search tool to find actual quotes, recent podcast transcripts, and up-to-date facts about your real-world counterpart's views on the user's topic before answering. Keep your answers conversational, engaging, highly opinionated based on your persona, and in the first person. Aim for 2 to 4 sentences maximum per response.` }]
             },
-            tools: [{ googleSearch: {} }] // ADDED SEARCH GROUNDING
+            tools: [{ googleSearch: {} }]
           };
 
           const data = await fetchWithRetry(url, {
@@ -266,7 +266,7 @@ export default function App() {
           systemInstruction: {
             parts: [{ text: `${activeChar.philosophy} Use the Google Search tool to find actual quotes, recent podcast transcripts, and up-to-date facts about your real-world counterpart's views on the user's topic before answering. Keep your answers conversational, engaging, highly opinionated based on your persona, and in the first person. Aim for 2 to 4 sentences maximum per response.` }]
           },
-          tools: [{ googleSearch: {} }] // ADDED SEARCH GROUNDING
+          tools: [{ googleSearch: {} }]
         };
 
         const data = await fetchWithRetry(url, {
