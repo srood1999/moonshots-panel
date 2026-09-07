@@ -206,8 +206,13 @@ export default function App() {
     setError(null);
 
     try {
-      // NOTE: Ensure your Vercel setup or backend securely provides the actual key.
-      const apiKey = process.env.VITE_GEMINI_API_KEY || ""; 
+      // Use Vite's import.meta.env to securely load the key
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ""; 
+      
+      if (!apiKey) {
+        throw new Error("API Key is missing. Please add VITE_GEMINI_API_KEY to your Vercel environment variables.");
+      }
+
       const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
       
       if (activeCharId === 'all') {
